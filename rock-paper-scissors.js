@@ -3,4 +3,43 @@ function getComputerChoice(){
     return choice === 1 ? "rock" : choice === 2 ? "paper" : "scissors";
 }
 
+function getHumanChoice() {
+    return prompt();
+}
+
+function playRound(humanChoice, cpuChoice) {
+    toLowerCase(humanChoice);
+    let playerWon = false;
+
+    if (humanChoice === cpuChoice) {
+        console.log("You tied!");
+    } else if (humanChoice === "rock" && cpuChoice === "scissors") {
+        console.log("You win! rock beats paper");
+        playerWon = true;
+    } else if (humanChoice === "paper" && cpuChoice === "rock") {
+        console.log("You win! paper beats rock");
+        playerWon = true;
+    } else if (humanChoice === "scissor" && cpuChoice === "paper") {
+        console.log("You win! scissors beats paper");
+        playerWon = true;
+    } else if (cpuChoiceChoice === "rock" && humanChoice === "scissors") {
+        console.log("You lose! rock beats paper");
+    } else if (cpuChoice === "paper" && humanChoice === "rock") {
+        console.log("You lose! paper beats rock");
+    } else if (cpuChoice === "scissor" && humanChoice === "paper") {
+        console.log("You lose! scissors beats paper");
+    }
+
+    if (playerWon) {
+        playerScore++;
+    } else {
+        cpuScore++;
+    }
+}
+
+let playerScore = 0;
+let cpuScore = 0;
+
+
 console.log(getComputerChoice());
+console.log(getHumanChoice());

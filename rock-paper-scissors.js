@@ -1,3 +1,6 @@
+let playerScore = 0;
+let cpuScore = 0;
+
 function getComputerChoice(){
     let choice = Math.floor(Math.random() * 3) + 1;
     return choice === 1 ? "rock" : choice === 2 ? "paper" : "scissors";
@@ -8,7 +11,7 @@ function getHumanChoice() {
 }
 
 function playRound(humanChoice, cpuChoice) {
-    toLowerCase(humanChoice);
+    humanChoice = humanChoice.toLowerCase();
     let playerWon = false;
 
     if (humanChoice === cpuChoice) {
@@ -22,7 +25,7 @@ function playRound(humanChoice, cpuChoice) {
     } else if (humanChoice === "scissor" && cpuChoice === "paper") {
         console.log("You win! scissors beats paper");
         playerWon = true;
-    } else if (cpuChoiceChoice === "rock" && humanChoice === "scissors") {
+    } else if (cpuChoice === "rock" && humanChoice === "scissors") {
         console.log("You lose! rock beats paper");
     } else if (cpuChoice === "paper" && humanChoice === "rock") {
         console.log("You lose! paper beats rock");
@@ -37,9 +40,21 @@ function playRound(humanChoice, cpuChoice) {
     }
 }
 
-let playerScore = 0;
-let cpuScore = 0;
+function playGame() {
+    for (let i = 0; i < 5; i++) {
+        const playerChoice = getHumanChoice();
+        const cpuChoice = getComputerChoice();
 
+        playRound(playerChoice, cpuChoice);
+    }
 
-console.log(getComputerChoice());
-console.log(getHumanChoice());
+    let resultString = "with a score of: " + playerScore + " vs a cpu score of: " + cpuScore;
+    
+    if (playerScore > cpuScore) {
+        console.log("You won! " + resultString);
+    } else {
+        console.log("You lost! " + resultString);
+    }
+}
+
+playGame();

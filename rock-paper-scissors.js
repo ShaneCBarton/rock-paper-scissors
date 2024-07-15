@@ -1,3 +1,10 @@
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+        playRound(button.className);
+    });
+});
+
 let playerScore = 0;
 let cpuScore = 0;
 
@@ -6,12 +13,9 @@ function getComputerChoice(){
     return choice === 1 ? "rock" : choice === 2 ? "paper" : "scissors";
 }
 
-function getHumanChoice() {
-    return prompt("Please enter 'rock', 'paper', or 'scissors'");
-}
-
 function playRound(humanChoice, cpuChoice) {
     humanChoice = humanChoice.toLowerCase();
+    cpuChoice = getComputerChoice();
     let playerWon = false;
 
     if (humanChoice === cpuChoice) {

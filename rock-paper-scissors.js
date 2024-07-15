@@ -1,47 +1,51 @@
 const buttons = document.querySelectorAll("button");
-buttons.forEach((button) => {
+buttons.forEach((button, index) => {
     button.addEventListener("click", () => {
-        playRound(button.className);
+        playRound(index + 1);
     });
 });
+
+const playerChoiceText = document.querySelector(".player-choice");
+const cpuChoiceText = document.querySelector(".cpu-choice");
+const scores = document.querySelector("#scores");
 
 let playerScore = 0;
 let cpuScore = 0;
 
 function getComputerChoice(){
-    let choice = Math.floor(Math.random() * 3) + 1;
-    return choice === 1 ? "rock" : choice === 2 ? "paper" : "scissors";
+    return Math.floor(Math.random() * 3) + 1;
 }
 
-function playRound(humanChoice, cpuChoice) {
-    humanChoice = humanChoice.toLowerCase();
-    cpuChoice = getComputerChoice();
-    let playerWon = false;
+function playRound(humanChoice) {
+    let cpuChoice = getComputerChoice();
 
-    if (humanChoice === cpuChoice) {
-        console.log("You tied!");
-    } else if (humanChoice === "rock" && cpuChoice === "scissors") {
-        console.log("You win! rock beats paper");
-        playerWon = true;
-    } else if (humanChoice === "paper" && cpuChoice === "rock") {
-        console.log("You win! paper beats rock");
-        playerWon = true;
-    } else if (humanChoice === "scissor" && cpuChoice === "paper") {
-        console.log("You win! scissors beats paper");
-        playerWon = true;
-    } else if (cpuChoice === "rock" && humanChoice === "scissors") {
-        console.log("You lose! rock beats paper");
-    } else if (cpuChoice === "paper" && humanChoice === "rock") {
-        console.log("You lose! paper beats rock");
-    } else if (cpuChoice === "scissor" && humanChoice === "paper") {
-        console.log("You lose! scissors beats paper");
-    }
+    displayChoice(humanChoice, playerChoiceText);
+    displayChoice(cpuChoice, cpuChoiceText);
 
-    if (playerWon) {
-        playerScore++;
-    } else {
+    if (humanChoice === cpuChoice) { // tie
+        roundResults("tie");
+    } else if (humanChoice === 1  && cpuChoice === 2) { // rock loses to paper
+        roundResults("lose");
         cpuScore++;
+    } else if (humanChoice === 1 && cpuChoice === 3) {// rock beats scissor
+        roundResults("win");
+        playerScore++;
+    } else if (humanChoice === 2 && cpuChoice === 1) {// paper beats rock
+        roundResults("win");
+        playerScore++;
+    } else if (humanChoice === 2 && cpuChoice === 3) {// paper loses to scissor
+        roundResults("lose");
+        cpuScore++;
+    } else if (humanChoice === 3 && cpuChoice === 1) {//scissor loses to rock
+        roundResults("lose");
+        cpuScore++;
+    } else if (humanChoice === 3 && cpuChoice === 2) {// scissor beats paper
+        roundResults("win");
+        playerScore++;
     }
+
+    scores.children[0].textContent = "Your Score: " + playerScore;
+    scores.children[1].textContent = "CPU Score: " + cpuScore;
 }
 
 function playGame() {
@@ -55,4 +59,33 @@ function playGame() {
     }
 }
 
-playGame();
+function displayChoice(choiceValue, choiceText) {
+    switch (choiceValue) {
+        case 1:
+            choiceText.textContent = "ROCK!";
+            break;
+        case 2:
+            choiceText.textContent = "PAPER!";
+            break;
+        case 3:
+            choiceText.textContent = "SCISSORS!";
+            break;
+    }
+}
+
+function roundResults(result) {
+    switch (result) {
+        case "win":
+            playerChoiceText.style.color = "green";
+            cpuChoiceText.style.color = "red";
+            break;
+        case "lose":
+            playerChoiceText.style.color = "red";
+            cpuChoiceText.style.color = "green";
+            break;
+        case "tie":
+            playerChoiceText.style.color = "orange";
+            cpuChoiceText.style.color = "orange";
+            break;
+    }
+}

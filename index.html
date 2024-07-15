@@ -5,12 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
     <script src="rock-paper-scissors.js" async></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="button-zone">
         <button class="rock">Rock!</button>
         <button class="paper">Paper!</button>
         <button class="scissors">Scissors!</button>
+    </div>
+
+    <div id="results">
+        <p>You picked: </p>
+        <p class="player-choice"></p>
+        <p>CPU picked: </p>
+        <p class="cpu-choice"></p>
+    </div>
+
+    <div id="scores">
+        <p class="player-score">Your Score: </p>
+        <p class="cpu-score">CPU Score: </p>
     </div>
 </body>
 </html>

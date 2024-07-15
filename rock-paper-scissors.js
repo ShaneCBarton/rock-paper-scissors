@@ -7,7 +7,7 @@ function getComputerChoice(){
 }
 
 function getHumanChoice() {
-    return prompt();
+    return prompt("Please enter 'rock', 'paper', or 'scissors'");
 }
 
 function playRound(humanChoice, cpuChoice) {
@@ -41,15 +41,9 @@ function playRound(humanChoice, cpuChoice) {
 }
 
 function playGame() {
-    for (let i = 0; i < 5; i++) {
-        const playerChoice = getHumanChoice();
-        const cpuChoice = getComputerChoice();
-
-        playRound(playerChoice, cpuChoice);
-    }
 
     let resultString = "with a score of: " + playerScore + " vs a cpu score of: " + cpuScore;
-    
+
     if (playerScore > cpuScore) {
         console.log("You won! " + resultString);
     } else {

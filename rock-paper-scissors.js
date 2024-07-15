@@ -8,6 +8,7 @@ buttons.forEach((button, index) => {
 const playerChoiceText = document.querySelector(".player-choice");
 const cpuChoiceText = document.querySelector(".cpu-choice");
 const scores = document.querySelector("#scores");
+const buttonZone = document.getElementById("button-zone");
 
 let playerScore = 0;
 let cpuScore = 0;
@@ -46,6 +47,8 @@ function playRound(humanChoice) {
 
     scores.children[0].textContent = "Your Score: " + playerScore;
     scores.children[1].textContent = "CPU Score: " + cpuScore;
+
+    checkScore();
 }
 
 function playGame() {
@@ -87,5 +90,23 @@ function roundResults(result) {
             playerChoiceText.style.color = "orange";
             cpuChoiceText.style.color = "orange";
             break;
+    }
+}
+function checkScore() {
+    if (playerScore === 5 || cpuScore === 5) {
+        buttonZone.remove();
+        const winnerDiv = document.createElement("div");
+        const winnerH1 = document.createElement("h1");
+    
+        if (playerScore === 5) {
+            winnerH1.style.color = "green";
+            winnerH1.textContent = "YOU WON!";
+        } else {
+            winnerH1.style.color = "red";
+            winnerH1.textContent = "YOU LOSE!";
+        }
+        
+        winnerDiv.appendChild(winnerH1);
+        document.body.appendChild(winnerDiv);
     }
 }
